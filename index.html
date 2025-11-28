@@ -54,23 +54,36 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 8px;
             margin-bottom: 6px;
             font-size: 12px;
         }
 
         .spinner {
-            width: 16px;
-            height: 16px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-top-color: rgba(255, 255, 255, 0.7);
-            border-radius: 50%;
-            animation: spin 180s linear infinite;
+            width: 20px;
+            height: 20px;
+            position: relative;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .spinner svg {
+            transform: rotate(-90deg);
+            width: 100%;
+            height: 100%;
+        }
+
+        .spinner-bg {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.2);
+            stroke-width: 2;
+        }
+
+        .spinner-progress {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.7);
+            stroke-width: 2;
+            stroke-dasharray: 56.5;
+            stroke-dashoffset: 56.5;
+            transition: stroke-dashoffset 0.1s linear;
         }
     </style>
 </head>
@@ -79,8 +92,13 @@
         <img id="rotatingImage" class="rotating-image" alt="Memory">
         <div class="counter">
             <div class="timer">
-                <div class="spinner"></div>
-                <span id="countdown">3:00</span>
+                <div class="spinner">
+                    <svg viewBox="0 0 20 20">
+                        <circle class="spinner-bg" cx="10" cy="10" r="9"></circle>
+                        <circle class="spinner-progress" cx="10" cy="10" r="9" id="progressCircle"></circle>
+                    </svg>
+                </div>
+                <span id="countdown">1:00</span>
             </div>
             <div>
                 <span id="currentIndex">1</span> / <span id="totalImages">0</span>
@@ -90,7 +108,7 @@
 
     <script>
         // Configuration
-        const ROTATION_INTERVAL = 3 * 60 * 1000; // 3 minutes in milliseconds
+        const ROTATION_INTERVAL = 1 * 60 * 1000; // 1 minute in milliseconds
         const REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes - check for new images
         const IMAGES_FOLDER = 'images/';
         const GITHUB_REPO = 'whiteaway/memeories'; // Update this with your repo
@@ -102,6 +120,8 @@
         const currentIndexElement = document.getElementById('currentIndex');
         const totalImagesElement = document.getElementById('totalImages');
         const countdownElement = document.getElementById('countdown');
+        const progressCircle = document.getElementById('progressCircle');
+        const circumference = 56.5; // 2 * PI * r (r=9)
 
         // Extract repo info from current URL if on GitHub Pages
         function getGitHubRepoInfo() {
@@ -229,12 +249,17 @@
             nextRotationTime = Date.now() + ROTATION_INTERVAL;
         }
 
-        // Update countdown timer
+        // Update countdown timer and progress circle
         function updateCountdown() {
             const timeLeft = Math.max(0, nextRotationTime - Date.now());
             const minutes = Math.floor(timeLeft / 60000);
             const seconds = Math.floor((timeLeft % 60000) / 1000);
             countdownElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Update progress circle
+            const progress = 1 - (timeLeft / ROTATION_INTERVAL);
+            const offset = circumference * (1 - progress);
+            progressCircle.style.strokeDashoffset = offset;
         }
 
         // Keyboard navigation (optional)
