@@ -61,7 +61,9 @@
     <script>
         // Configuration
         const ROTATION_INTERVAL = 3 * 60 * 1000; // 3 minutes in milliseconds
+        const REFRESH_INTERVAL = 5 * 60 * 1000; // 5 minutes - check for new images
         const IMAGES_FOLDER = 'images/';
+        const GITHUB_REPO = 'YOUR_USERNAME/YOUR_REPO'; // Update this with your repo
         
         let images = [];
         let currentIndex = 0;
@@ -69,28 +71,108 @@
         const currentIndexElement = document.getElementById('currentIndex');
         const totalImagesElement = document.getElementById('totalImages');
 
-        // Fetch images.json to get list of images
+        // Extract repo info from current URL if on GitHub Pages
+        function getGitHubRepoInfo() {
+            const hostname = window.location.hostname;
+            const pathname = window.location.pathname;
+            
+            if (hostname.includes('github.io')) {
+                // Format: username.github.io/repo-name
+                const parts = pathname.split('/').filter(p => p);
+                if (parts.length > 0) {
+                    const username = hostname.split('.')[0];
+                    const repo = parts[0];
+                    return `${username}/${repo}`;
+                }
+            }
+            return GITHUB_REPO;
+        }
+
+        // Fetch images from GitHub API
         async function loadImages() {
             try {
-                const response = await fetch('images.json');
-                if (!response.ok) throw new Error('Could not load images.json');
+                const repo = getGitHubRepoInfo();
+                const apiUrl = `https://api.github.com/repos/${repo}/contents/images`;
                 
-                const data = await response.json();
-                images = data.images || [];
+                console.log('Fetching images from:', apiUrl);
+                const response = await fetch(apiUrl);
                 
-                // Shuffle images for random order
-                images = images.sort(() => Math.random() - 0.5);
+                if (!response.ok) {
+                    throw new Error(`GitHub API returned ${response.status}`);
+                }
+                
+                const files = await response.json();
+                
+                // Filter for image files
+                const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'];
+                const newImagesList = files
+                    .filter(file => file.type === 'file')
+                    .filter(file => imageExtensions.some(ext => file.name.toLowerCase().endsWith(ext)))
+                    .map(file => file.name);
+                
+                if (newImagesList.length === 0) {
+                    throw new Error('No images found in the images/ folder');
+                }
+                
+                // First load - shuffle everything
+                if (images.length === 0) {
+                    images = newImagesList.sort(() => Math.random() - 0.5);
+                    console.log(`Initial load: ${images.length} images`);
+                } else {
+                    // Incremental update - preserve rotation order
+                    const currentImage = images[currentIndex];
+                    
+                    // Find removed images
+                    const removed = images.filter(img => !newImagesList.includes(img));
+                    if (removed.length > 0) {
+                        console.log('Removed images:', removed);
+                        images = images.filter(img => newImagesList.includes(img));
+                    }
+                    
+                    // Find new images and append them in random positions
+                    const added = newImagesList.filter(img => !images.includes(img));
+                    if (added.length > 0) {
+                        console.log('New images:', added);
+                        // Shuffle new images
+                        const shuffledNew = added.sort(() => Math.random() - 0.5);
+                        // Insert at random positions
+                        shuffledNew.forEach(newImg => {
+                            const insertPos = Math.floor(Math.random() * (images.length + 1));
+                            images.splice(insertPos, 0, newImg);
+                        });
+                    }
+                    
+                    // Adjust current index if the current image still exists
+                    if (currentImage && images.includes(currentImage)) {
+                        currentIndex = images.indexOf(currentImage);
+                    } else {
+                        // Current image was removed, stay at same position or wrap
+                        currentIndex = currentIndex % images.length;
+                    }
+                    
+                    if (removed.length > 0 || added.length > 0) {
+                        console.log(`Updated: ${images.length} total images (added: ${added.length}, removed: ${removed.length})`);
+                    }
+                }
                 
                 totalImagesElement.textContent = images.length;
                 
-                if (images.length > 0) {
+                if (images.length > 0 && !imgElement.src) {
                     showImage(currentIndex);
-                    setInterval(nextImage, ROTATION_INTERVAL);
                 }
             } catch (error) {
                 console.error('Error loading images:', error);
                 document.querySelector('.image-container').innerHTML = 
-                    '<div style="color: white; text-align: center; font-family: sans-serif;">Error loading images. Make sure images.json exists.</div>';
+                    `<div style="color: white; text-align: center; font-family: sans-serif; padding: 20px;">
+                        <h2>Error loading images</h2>
+                        <p style="margin-top: 10px;">Make sure:</p>
+                        <ul style="list-style: none; margin-top: 10px;">
+                            <li>• Images are in the images/ folder</li>
+                            <li>• Repository is public</li>
+                            <li>• GITHUB_REPO is set correctly (line 66)</li>
+                        </ul>
+                        <p style="margin-top: 10px; font-size: 12px;">Error: ${error.message}</p>
+                    </div>`;
             }
         }
 
@@ -125,8 +207,10 @@
             }
         });
 
-        // Start loading
+        // Start loading and set up intervals
         loadImages();
+        setInterval(loadImages, REFRESH_INTERVAL); // Check for new images every 5 minutes
+        setInterval(nextImage, ROTATION_INTERVAL); // Rotate image every 3 minutes
     </script>
 </body>
 </html>
