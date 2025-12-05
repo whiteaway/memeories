@@ -411,6 +411,18 @@
             nextRotationTime = Date.now() + ROTATION_INTERVAL;
         }
 
+        function navigatePrevious() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            showImage(currentIndex);
+            nextRotationTime = Date.now() + ROTATION_INTERVAL;
+        }
+
+        function navigateNext() {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage(currentIndex);
+            nextRotationTime = Date.now() + ROTATION_INTERVAL;
+        }
+
         // Update countdown timer and progress circle
         function updateCountdown() {
             const timeLeft = Math.max(0, nextRotationTime - Date.now());
@@ -427,28 +439,15 @@
         // Keyboard navigation (optional)
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') {
-                currentIndex = (currentIndex + 1) % images.length;
-                showImage(currentIndex);
-                nextRotationTime = Date.now() + ROTATION_INTERVAL;
+                navigateNext();
             } else if (e.key === 'ArrowLeft') {
-                currentIndex = (currentIndex - 1 + images.length) % images.length;
-                showImage(currentIndex);
-                nextRotationTime = Date.now() + ROTATION_INTERVAL;
+                navigatePrevious();
             }
         });
 
         // Mouse navigation buttons
-        document.getElementById('prevButton').addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
-            showImage(currentIndex);
-            nextRotationTime = Date.now() + ROTATION_INTERVAL;
-        });
-
-        document.getElementById('nextButton').addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % images.length;
-            showImage(currentIndex);
-            nextRotationTime = Date.now() + ROTATION_INTERVAL;
-        });
+        document.getElementById('prevButton').addEventListener('click', navigatePrevious);
+        document.getElementById('nextButton').addEventListener('click', navigateNext);
 
         // Start loading and set up intervals
         loadImages();
