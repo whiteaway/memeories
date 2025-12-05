@@ -120,71 +120,40 @@
         }
 
         /* Christmas Snow Effect */
-        .snowflake {
+        #snowContainer {
             position: fixed;
-            top: -10px;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .snowflake {
+            position: absolute;
             color: white;
             font-size: 1em;
             user-select: none;
-            z-index: -1;
             pointer-events: none;
-            animation: fall linear infinite;
         }
 
-        @keyframes fall {
-            to {
-                transform: translateY(100vh);
-            }
+        .snow-pile {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            pointer-events: none;
         }
 
-        .snowflake:nth-of-type(1) { left: 2%; animation-duration: 8s; animation-delay: 0s; opacity: 0.8; }
-        .snowflake:nth-of-type(2) { left: 7%; animation-duration: 10s; animation-delay: 1s; opacity: 0.9; }
-        .snowflake:nth-of-type(3) { left: 12%; animation-duration: 9s; animation-delay: 2s; opacity: 0.7; }
-        .snowflake:nth-of-type(4) { left: 18%; animation-duration: 11s; animation-delay: 0.5s; opacity: 0.8; }
-        .snowflake:nth-of-type(5) { left: 25%; animation-duration: 8.5s; animation-delay: 1.5s; opacity: 0.9; }
-        .snowflake:nth-of-type(6) { left: 32%; animation-duration: 10.5s; animation-delay: 0s; opacity: 0.7; }
-        .snowflake:nth-of-type(7) { left: 38%; animation-duration: 9.5s; animation-delay: 2.5s; opacity: 0.8; }
-        .snowflake:nth-of-type(8) { left: 45%; animation-duration: 11.5s; animation-delay: 1s; opacity: 0.9; }
-        .snowflake:nth-of-type(9) { left: 52%; animation-duration: 8s; animation-delay: 3s; opacity: 0.7; }
-        .snowflake:nth-of-type(10) { left: 58%; animation-duration: 10s; animation-delay: 0.5s; opacity: 0.8; }
-        .snowflake:nth-of-type(11) { left: 65%; animation-duration: 9s; animation-delay: 1.5s; opacity: 0.9; }
-        .snowflake:nth-of-type(12) { left: 72%; animation-duration: 11s; animation-delay: 2s; opacity: 0.7; }
-        .snowflake:nth-of-type(13) { left: 78%; animation-duration: 8.5s; animation-delay: 0s; opacity: 0.8; }
-        .snowflake:nth-of-type(14) { left: 85%; animation-duration: 10.5s; animation-delay: 3s; opacity: 0.9; }
-        .snowflake:nth-of-type(15) { left: 92%; animation-duration: 9.5s; animation-delay: 1s; opacity: 0.7; }
-        .snowflake:nth-of-type(16) { left: 5%; animation-duration: 11.5s; animation-delay: 2.5s; opacity: 0.8; }
-        .snowflake:nth-of-type(17) { left: 15%; animation-duration: 8s; animation-delay: 0.5s; opacity: 0.9; }
-        .snowflake:nth-of-type(18) { left: 28%; animation-duration: 10s; animation-delay: 1.5s; opacity: 0.7; }
-        .snowflake:nth-of-type(19) { left: 42%; animation-duration: 9s; animation-delay: 3s; opacity: 0.8; }
-        .snowflake:nth-of-type(20) { left: 55%; animation-duration: 11s; animation-delay: 0s; opacity: 0.9; }
-        .snowflake:nth-of-type(21) { left: 68%; animation-duration: 8.5s; animation-delay: 2s; opacity: 0.7; }
-        .snowflake:nth-of-type(22) { left: 75%; animation-duration: 10.5s; animation-delay: 1s; opacity: 0.8; }
-        .snowflake:nth-of-type(23) { left: 88%; animation-duration: 9.5s; animation-delay: 2.5s; opacity: 0.9; }
-        .snowflake:nth-of-type(24) { left: 95%; animation-duration: 11.5s; animation-delay: 0.5s; opacity: 0.7; }
-        .snowflake:nth-of-type(25) { left: 3%; animation-duration: 9s; animation-delay: 1.2s; opacity: 0.8; }
-        .snowflake:nth-of-type(26) { left: 9%; animation-duration: 10.5s; animation-delay: 2.3s; opacity: 0.7; }
-        .snowflake:nth-of-type(27) { left: 14%; animation-duration: 8.5s; animation-delay: 0.8s; opacity: 0.9; }
-        .snowflake:nth-of-type(28) { left: 20%; animation-duration: 11.5s; animation-delay: 1.7s; opacity: 0.8; }
-        .snowflake:nth-of-type(29) { left: 27%; animation-duration: 9.5s; animation-delay: 3.2s; opacity: 0.7; }
-        .snowflake:nth-of-type(30) { left: 34%; animation-duration: 10s; animation-delay: 0.3s; opacity: 0.9; }
-        .snowflake:nth-of-type(31) { left: 40%; animation-duration: 8s; animation-delay: 2.8s; opacity: 0.8; }
-        .snowflake:nth-of-type(32) { left: 47%; animation-duration: 11s; animation-delay: 1.4s; opacity: 0.7; }
-        .snowflake:nth-of-type(33) { left: 54%; animation-duration: 9s; animation-delay: 0.6s; opacity: 0.9; }
-        .snowflake:nth-of-type(34) { left: 60%; animation-duration: 10.5s; animation-delay: 2.1s; opacity: 0.8; }
-        .snowflake:nth-of-type(35) { left: 67%; animation-duration: 8.5s; animation-delay: 1.9s; opacity: 0.7; }
-        .snowflake:nth-of-type(36) { left: 74%; animation-duration: 11.5s; animation-delay: 0.4s; opacity: 0.9; }
-        .snowflake:nth-of-type(37) { left: 80%; animation-duration: 9.5s; animation-delay: 2.6s; opacity: 0.8; }
-        .snowflake:nth-of-type(38) { left: 87%; animation-duration: 10s; animation-delay: 1.1s; opacity: 0.7; }
-        .snowflake:nth-of-type(39) { left: 93%; animation-duration: 8s; animation-delay: 3.4s; opacity: 0.9; }
-        .snowflake:nth-of-type(40) { left: 4%; animation-duration: 11s; animation-delay: 0.9s; opacity: 0.8; }
-        .snowflake:nth-of-type(41) { left: 11%; animation-duration: 9s; animation-delay: 2.4s; opacity: 0.7; }
-        .snowflake:nth-of-type(42) { left: 17%; animation-duration: 10.5s; animation-delay: 1.6s; opacity: 0.9; }
-        .snowflake:nth-of-type(43) { left: 24%; animation-duration: 8.5s; animation-delay: 3.1s; opacity: 0.8; }
-        .snowflake:nth-of-type(44) { left: 31%; animation-duration: 11.5s; animation-delay: 0.7s; opacity: 0.7; }
-        .snowflake:nth-of-type(45) { left: 37%; animation-duration: 9.5s; animation-delay: 2.9s; opacity: 0.9; }
-        .snowflake:nth-of-type(46) { left: 44%; animation-duration: 10s; animation-delay: 1.3s; opacity: 0.8; }
-        .snowflake:nth-of-type(47) { left: 51%; animation-duration: 8s; animation-delay: 0.2s; opacity: 0.7; }
-        .snowflake:nth-of-type(48) { left: 57%; animation-duration: 11s; animation-delay: 2.7s; opacity: 0.9; }
+        .settled-snowflake {
+            position: absolute;
+            color: white;
+            font-size: 1em;
+            user-select: none;
+            pointer-events: none;
+        }
 
         /* Navigation buttons */
         .nav-button {
@@ -238,54 +207,9 @@
 </head>
 <body>
     <!-- Christmas Snow Overlay -->
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
+    <div id="snowContainer">
+        <div class="snow-pile" id="snowPile"></div>
+    </div>
 
     <div class="image-container">
         <img id="rotatingImage" class="rotating-image" alt="Memory">
@@ -502,6 +426,160 @@
         setInterval(loadImages, REFRESH_INTERVAL); // Check for new images every 5 minutes
         setInterval(nextImage, ROTATION_INTERVAL); // Rotate image every 3 minutes
         setInterval(updateCountdown, 1000); // Update countdown every second
+
+        // Snow piling system
+        const snowContainer = document.getElementById('snowContainer');
+        const snowPile = document.getElementById('snowPile');
+        const snowflakes = [];
+        const settledSnowflakes = [];
+        const maxSnowflakes = 48;
+        const snowSymbols = ['❄', '❅', '❆'];
+        const screenWidth = window.innerWidth;
+        const columnWidth = 20; // pixels per column
+        const numColumns = Math.ceil(screenWidth / columnWidth);
+        const columnHeights = new Array(numColumns).fill(0);
+
+        function createSnowflake() {
+            const snowflake = document.createElement('div');
+            snowflake.className = 'snowflake';
+            snowflake.textContent = snowSymbols[Math.floor(Math.random() * snowSymbols.length)];
+            snowflake.style.left = Math.random() * 100 + '%';
+            snowflake.style.top = '-20px';
+            snowflake.style.opacity = 0.7 + Math.random() * 0.3;
+            snowflake.style.fontSize = (0.8 + Math.random() * 0.4) + 'em';
+            
+            snowContainer.appendChild(snowflake);
+            
+            const duration = 8000 + Math.random() * 4000; // 8-12 seconds
+            const startTime = Date.now();
+            const startLeft = parseFloat(snowflake.style.left);
+            const sway = (Math.random() - 0.5) * 10; // Sway left/right
+            
+            return {
+                element: snowflake,
+                duration,
+                startTime,
+                startLeft,
+                sway,
+                settled: false
+            };
+        }
+
+        function settleSnowflake(flake, x, screenHeight) {
+            // Calculate which column this snowflake lands in
+            const xPixels = (x / 100) * screenWidth;
+            const column = Math.floor(xPixels / columnWidth);
+            const clampedColumn = Math.max(0, Math.min(numColumns - 1, column));
+            
+            // Get the height for this column
+            const landingHeight = columnHeights[clampedColumn];
+            
+            // Move from falling container to settled pile
+            flake.element.remove();
+            
+            const settledFlake = document.createElement('div');
+            settledFlake.className = 'settled-snowflake';
+            settledFlake.textContent = flake.element.textContent;
+            settledFlake.style.left = x + '%';
+            settledFlake.style.bottom = landingHeight + 'px';
+            settledFlake.style.opacity = flake.element.style.opacity;
+            settledFlake.style.fontSize = flake.element.style.fontSize;
+            
+            snowPile.appendChild(settledFlake);
+            settledSnowflakes.push(settledFlake);
+            
+            // Increase the height for this column and adjacent columns
+            // Using smaller height with overlap for denser packing
+            const flakeHeight = 10; // reduced from 16 to allow overlap
+            columnHeights[clampedColumn] += flakeHeight;
+            
+            // Add to adjacent columns too for more natural piling
+            if (clampedColumn > 0) {
+                columnHeights[clampedColumn - 1] += flakeHeight * 0.6;
+            }
+            if (clampedColumn < numColumns - 1) {
+                columnHeights[clampedColumn + 1] += flakeHeight * 0.6;
+            }
+        }
+
+        function resetSnow() {
+            // Clear all settled snowflakes
+            settledSnowflakes.forEach(flake => {
+                if (flake.parentNode) {
+                    flake.remove();
+                }
+            });
+            settledSnowflakes.length = 0;
+            
+            // Clear falling snowflakes
+            snowflakes.forEach(flake => {
+                if (flake.element.parentNode) {
+                    flake.element.remove();
+                }
+            });
+            snowflakes.length = 0;
+            
+            // Reset all column heights
+            columnHeights.fill(0);
+        }
+
+        function animateSnow() {
+            const now = Date.now();
+            const screenHeight = window.innerHeight;
+            
+            // Check if screen is filled - check the maximum column height
+            const maxColumnHeight = Math.max(...columnHeights);
+            if (maxColumnHeight >= screenHeight) {
+                resetSnow();
+            }
+            
+            // Create new snowflakes
+            while (snowflakes.length < maxSnowflakes) {
+                snowflakes.push(createSnowflake());
+            }
+            
+            // Animate existing snowflakes
+            for (let i = snowflakes.length - 1; i >= 0; i--) {
+                const flake = snowflakes[i];
+                
+                if (flake.settled) continue;
+                
+                const elapsed = now - flake.startTime;
+                const progress = elapsed / flake.duration;
+                
+                if (progress >= 1) {
+                    // Snowflake has reached where it will land
+                    const swayOffset = Math.sin(progress * Math.PI * 4) * flake.sway;
+                    const x = flake.startLeft + swayOffset;
+                    
+                    settleSnowflake(flake, x, screenHeight);
+                    flake.settled = true;
+                    
+                    // Remove from falling array
+                    snowflakes.splice(i, 1);
+                } else {
+                    // Animate snowflake falling
+                    // Calculate target landing column to get landing height
+                    const swayOffset = Math.sin(progress * Math.PI * 4) * flake.sway;
+                    const x = flake.startLeft + swayOffset;
+                    const xPixels = (x / 100) * screenWidth;
+                    const column = Math.floor(xPixels / columnWidth);
+                    const clampedColumn = Math.max(0, Math.min(numColumns - 1, column));
+                    const landingHeight = columnHeights[clampedColumn];
+                    
+                    const maxY = screenHeight - landingHeight;
+                    const y = maxY * progress - 20;
+                    
+                    flake.element.style.top = y + 'px';
+                    flake.element.style.left = x + '%';
+                }
+            }
+            
+            requestAnimationFrame(animateSnow);
+        }
+        
+        // Start snow animation
+        animateSnow();
     </script>
 </body>
 </html>
