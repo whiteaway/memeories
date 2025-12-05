@@ -161,6 +161,55 @@
         .snowflake:nth-of-type(22) { left: 75%; animation-duration: 10.5s; animation-delay: 1s; opacity: 0.8; }
         .snowflake:nth-of-type(23) { left: 88%; animation-duration: 9.5s; animation-delay: 2.5s; opacity: 0.9; }
         .snowflake:nth-of-type(24) { left: 95%; animation-duration: 11.5s; animation-delay: 0.5s; opacity: 0.7; }
+
+        /* Navigation buttons */
+        .nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 48px;
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1;
+            padding: 0;
+        }
+
+        .nav-button:hover {
+            background: rgba(0, 0, 0, 0.8);
+            color: rgba(255, 255, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .nav-button:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .nav-button.prev {
+            left: 20px;
+        }
+
+        .nav-button.next {
+            right: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-button {
+                width: 60px;
+                height: 60px;
+                font-size: 36px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -192,6 +241,9 @@
 
     <div class="image-container">
         <img id="rotatingImage" class="rotating-image" alt="Memory">
+        
+        <button class="nav-button prev" id="prevButton" aria-label="Previous image">‹</button>
+        <button class="nav-button next" id="nextButton" aria-label="Next image">›</button>
         
         <div class="qr-code">
             <div class="qr-label">Memeories™</div>
@@ -383,6 +435,19 @@
                 showImage(currentIndex);
                 nextRotationTime = Date.now() + ROTATION_INTERVAL;
             }
+        });
+
+        // Mouse navigation buttons
+        document.getElementById('prevButton').addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            showImage(currentIndex);
+            nextRotationTime = Date.now() + ROTATION_INTERVAL;
+        });
+
+        document.getElementById('nextButton').addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage(currentIndex);
+            nextRotationTime = Date.now() + ROTATION_INTERVAL;
         });
 
         // Start loading and set up intervals
