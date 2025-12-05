@@ -118,9 +118,78 @@
             padding: 4px 8px;
             border-radius: 4px;
         }
+
+        /* Christmas Snow Effect */
+        .snowflake {
+            position: fixed;
+            top: -10px;
+            color: white;
+            font-size: 1em;
+            user-select: none;
+            z-index: 1000;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+            }
+        }
+
+        .snowflake:nth-of-type(1) { left: 2%; animation-duration: 8s; animation-delay: 0s; opacity: 0.8; }
+        .snowflake:nth-of-type(2) { left: 7%; animation-duration: 10s; animation-delay: 1s; opacity: 0.9; }
+        .snowflake:nth-of-type(3) { left: 12%; animation-duration: 9s; animation-delay: 2s; opacity: 0.7; }
+        .snowflake:nth-of-type(4) { left: 18%; animation-duration: 11s; animation-delay: 0.5s; opacity: 0.8; }
+        .snowflake:nth-of-type(5) { left: 25%; animation-duration: 8.5s; animation-delay: 1.5s; opacity: 0.9; }
+        .snowflake:nth-of-type(6) { left: 32%; animation-duration: 10.5s; animation-delay: 0s; opacity: 0.7; }
+        .snowflake:nth-of-type(7) { left: 38%; animation-duration: 9.5s; animation-delay: 2.5s; opacity: 0.8; }
+        .snowflake:nth-of-type(8) { left: 45%; animation-duration: 11.5s; animation-delay: 1s; opacity: 0.9; }
+        .snowflake:nth-of-type(9) { left: 52%; animation-duration: 8s; animation-delay: 3s; opacity: 0.7; }
+        .snowflake:nth-of-type(10) { left: 58%; animation-duration: 10s; animation-delay: 0.5s; opacity: 0.8; }
+        .snowflake:nth-of-type(11) { left: 65%; animation-duration: 9s; animation-delay: 1.5s; opacity: 0.9; }
+        .snowflake:nth-of-type(12) { left: 72%; animation-duration: 11s; animation-delay: 2s; opacity: 0.7; }
+        .snowflake:nth-of-type(13) { left: 78%; animation-duration: 8.5s; animation-delay: 0s; opacity: 0.8; }
+        .snowflake:nth-of-type(14) { left: 85%; animation-duration: 10.5s; animation-delay: 3s; opacity: 0.9; }
+        .snowflake:nth-of-type(15) { left: 92%; animation-duration: 9.5s; animation-delay: 1s; opacity: 0.7; }
+        .snowflake:nth-of-type(16) { left: 5%; animation-duration: 11.5s; animation-delay: 2.5s; opacity: 0.8; }
+        .snowflake:nth-of-type(17) { left: 15%; animation-duration: 8s; animation-delay: 0.5s; opacity: 0.9; }
+        .snowflake:nth-of-type(18) { left: 28%; animation-duration: 10s; animation-delay: 1.5s; opacity: 0.7; }
+        .snowflake:nth-of-type(19) { left: 42%; animation-duration: 9s; animation-delay: 3s; opacity: 0.8; }
+        .snowflake:nth-of-type(20) { left: 55%; animation-duration: 11s; animation-delay: 0s; opacity: 0.9; }
+        .snowflake:nth-of-type(21) { left: 68%; animation-duration: 8.5s; animation-delay: 2s; opacity: 0.7; }
+        .snowflake:nth-of-type(22) { left: 75%; animation-duration: 10.5s; animation-delay: 1s; opacity: 0.8; }
+        .snowflake:nth-of-type(23) { left: 88%; animation-duration: 9.5s; animation-delay: 2.5s; opacity: 0.9; }
+        .snowflake:nth-of-type(24) { left: 95%; animation-duration: 11.5s; animation-delay: 0.5s; opacity: 0.7; }
     </style>
 </head>
 <body>
+    <!-- Christmas Snow Overlay -->
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+    <div class="snowflake">❄</div>
+    <div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
+
     <div class="image-container">
         <img id="rotatingImage" class="rotating-image" alt="Memory">
         
